@@ -18,7 +18,7 @@ export default class Home extends Component {
 
     return(
       <div>
-        <h1>Welcome to Bookwerm</h1>
+        <h5>dash</h5>
       </div>
     )
   }
