@@ -3,8 +3,9 @@ import React from "react"
 const Footer = () => {
 
   const style = {
-    margin: '50px auto',
-    textAlign: 'center'
+    margin: '50px auto 0px',
+    textAlign: 'center',
+    clear: 'both'
   }
 
   return(

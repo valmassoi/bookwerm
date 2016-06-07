@@ -19,6 +19,11 @@ export default class Home extends Component {
     return(
       <div>
         <h1>Welcome to Bookwerm</h1>
+        <ul>
+          <li>Catalog all of your books</li>
+          <li>See other users' books</li>
+          <li>Make trade requests</li>
+        </ul>
       </div>
     )
   }

@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import { Link } from 'react-router'
+import AddBook from '../components/add_book'
+import BookList from '../components/book_list'
 
 export default class Dashboard extends Component {
 
@@ -18,7 +20,10 @@ export default class Dashboard extends Component {
 
     return(
       <div>
-        <h5>dash</h5>
+        <h2>Dashboard</h2>
+        Add to your collection:
+        <AddBook />
+        <BookList />
       </div>
     )
   }
