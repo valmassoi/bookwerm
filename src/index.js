@@ -15,7 +15,7 @@ const store = createStoreWithMiddleware(reducers)
 
 const token = localStorage.getItem('token')
 if (token)
-  store.dispatch({ type: AUTH_USER })
+  store.dispatch({ type: AUTH_USER, payload: 'getFromToken || localStorage?' })
 
 const app = document.getElementById('app')
 

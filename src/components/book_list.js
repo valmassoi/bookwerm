@@ -3,6 +3,10 @@ import BookItem from './book_item'
 
 class BookList extends Component {
 
+  deleteBook(book) {
+    console.log("delete:", book.title)//TODO action creator
+  }
+
   render() {
     let books = [
       { title:'book1', img:'https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/7/30/18/grid-cell-14969-1375222023-8.jpg' },
@@ -16,7 +20,7 @@ class BookList extends Component {
       <ul class="list-group" style={{marginTop: '5px'}}>
         {books.map(book => {
           return (
-            <BookItem book={book} key={book.title} />
+            <BookItem book={book} key={book.title} deleteBook={book => this.deleteBook(book)} />
 
           )
         })}

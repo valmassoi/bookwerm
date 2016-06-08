@@ -9,7 +9,7 @@ class Signup extends Component {
   }
 
   renderAlert() {
-    if(this.props.errorMessage) {
+    if(this.props.errorMessage) {//FIX reset on unmount
       return (
         <div className="alert alert-danger">
           <strong>Oops!</strong> {this.props.errorMessage}

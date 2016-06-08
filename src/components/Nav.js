@@ -22,7 +22,7 @@ class Nav extends Component {
     else {
       return (
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Username <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{this.props.email.split("@")[0]} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><Link to="dashboard" onClick={this.setCollapsed.bind(this)}>Dashboard</Link></li>
             <li><Link to="settings" onClick={this.setCollapsed.bind(this)}>Settings</Link></li>
@@ -71,12 +71,12 @@ class Nav extends Component {
             <ul class="nav navbar-nav">
               <li class={homeClass}><Link to="/" onClick={this.setCollapsed.bind(this)}>Home</Link></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
+            {/*<form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search" />
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+            </form>*/}
             <ul class="nav navbar-nav navbar-right">
 
               {this.renderLinks()}
@@ -91,7 +91,8 @@ class Nav extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    email: state.auth.email
   }
 }
 
