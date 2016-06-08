@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link, browserHistory } from "react-router"
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import * as actions from '../actions/auth'
 
 class Nav extends Component {
   constructor() {

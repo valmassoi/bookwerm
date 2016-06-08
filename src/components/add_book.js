@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import * as actions from '../actions'
+import * as actions from '../actions/book'
 
-class AddBook extends Component {
+class AddBook extends Component {//TODO RENAME ACTIONS, REDUCER... TO SEARCH
 
   constructor(props) {
     super(props);
@@ -19,8 +20,7 @@ class AddBook extends Component {
   handleSubmit(e) {
     e.preventDefault(e)
     let { book } = this.state
-    console.log(book);
-    //TODO action creaetor
+    this.props.addBook(book)
     e.target.reset()
   }
 
@@ -34,7 +34,7 @@ class AddBook extends Component {
         <button
           style={{marginTop: '5px'}}
           action="submit" className="btn btn-primary">
-          Add
+          Search
         </button>
       </form>
     )
@@ -42,4 +42,4 @@ class AddBook extends Component {
 
 }
 
-export default AddBook
+export default connect(null, actions)(AddBook)
