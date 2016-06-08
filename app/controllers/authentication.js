@@ -3,11 +3,24 @@ const User = require('../models/user')
 
 if (process.env.NODE_ENV !== 'production')
   require('dotenv').config()
-const { SECRET_KEY } = process.env
+const { SECRET_KEY, SENDGRID_USER, SENDGRID_PASSWORD } = process.env
+const sendgrid = require('sendgrid')(SENDGRID_USER, SENDGRID_PASSWORD)
 
 function tokenForUser(user) {
   const timestamp = Date.now()
   return jwt.encode({ sub: user.id, iat: timestamp }, SECRET_KEY) //dont use email,,,, sub is the subject of the token,,,, iat: issue at time
+}
+
+function sendEmail(email) {
+  sendgrid.send({
+    to:       email,
+    from:     'noreply@bookwerm.heroku.com',
+    subject:  'Bookwerm Account Created!',
+    text:     'Thanks for signing up. Visit http://bookwerm.heroku.com/dashboard to get started!'
+  }, (err, json) => {
+    if (err) { return console.error(err) }
+    console.log("send grid:", json)
+  })
 }
 
 exports.signin = function(req, res, next) {
@@ -37,6 +50,7 @@ exports.signup = function(req, res, next) {
     user.save((err) => {
       if(err) {return next(err)}
       res.json({ token: tokenForUser(user) })
+      sendEmail(email)
     })
 
   })
