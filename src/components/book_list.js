@@ -15,20 +15,15 @@ class BookList extends Component {
   }
 
   render() {
-    let { mode } = this.props
+    let { mode, searchBooks, collectionBooks, allBooks } = this.props
     let books = []
     if (mode=="search")
-      books = [...this.props.books]//TODO change name in reducer/actions
-    if (mode=="user_collection"){//HACK
-      books = [
-        { title:'book1', img:'https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/7/30/18/grid-cell-14969-1375222023-8.jpg' },
-        { title:'book2', img:'http://bookriotcom.c.presscdn.com/wp-content/uploads/2014/08/HP_pb_new_1.jpg' }]
+      books = [...searchBooks]
+    if (mode=="user_collection"){
+      books = [...collectionBooks]
     }
-    if (mode=="all"){//HACK
-      books = [
-        { title:'bookall1', img:'https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/7/30/18/grid-cell-14969-1375222023-8.jpg' },
-        { title:'bookall2', img:'http://bookriotcom.c.presscdn.com/wp-content/uploads/2014/08/HP_pb_new_1.jpg' }]
-    }
+    if (mode=="all")
+      books = [...allBooks]
     return (
       <ul class="list-group" style={{marginTop: '5px'}}>
         {books.map((book, i) => {
@@ -42,7 +37,11 @@ class BookList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { books: state.books.books }
+  return {
+    searchBooks: state.books.searchBooks,
+    collectionBooks: state.books.collectionBooks,
+    allBooks: state.books.allBooks
+  }
 }
 
 export default connect(mapStateToProps, actions)(BookList)

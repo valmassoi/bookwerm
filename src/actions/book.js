@@ -18,14 +18,14 @@ export function addBook(book) {//search
 }
 
 export function selectBook(book) {
-  console.log("add:,", book);
   return function(dispatch) {
     axios.post(`${API_URL}/api/book`, {
       book }, { headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
-        console.log(res.data);
-        dispatch({ type: SELECT_BOOK, payload: res.data })
+        console.log(res.data)
+        //TODO MONGO
+        dispatch({ type: SELECT_BOOK, payload: book })
       })
       .catch(res => {
         //err
@@ -40,6 +40,7 @@ export function deleteBook(book) {
       book, headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
+        //TODO MONGO
         dispatch({ type: DELETE_BOOK, payload: book })
       })
       .catch(res => {

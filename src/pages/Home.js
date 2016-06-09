@@ -18,11 +18,14 @@ export default class Home extends Component {
 
     return(
       <div>
+        <Link to="/dashboard">
+          <button class="btn btn-primary pull-right">Dashboard</button>
+        </Link>
         <h1>Welcome to Bookwerm</h1>
         <ul>
           <li>Catalog all of your books</li>
           <li>See other users' books</li>
-          <li>Make trade requests</li>
+          <li>Execute trades</li>
         </ul>
       </div>
     )

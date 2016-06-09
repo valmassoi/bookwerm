@@ -1,11 +1,12 @@
 import React, { Component } from "react"
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import AddBook from '../components/book_search'
 import BookList from '../components/book_list'
 
 import Trades from '../components/trades'
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
 
   constructor(props) {
     super(props);
@@ -14,7 +15,7 @@ export default class Dashboard extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount() { //load my collection, and trade req
 
   }
 
@@ -22,6 +23,7 @@ export default class Dashboard extends Component {
     const style = {
       clear: 'both'
     }
+    let { collectionBooks } = this.props
 
     return(
       <div>
@@ -32,8 +34,21 @@ export default class Dashboard extends Component {
         <AddBook />
         <BookList mode="search" />
         <h3 style={style}>Your Collection</h3>
-        <BookList mode="user_collection" />
+        {
+          collectionBooks.length > 0 ?
+          <BookList mode="user_collection" /> :
+          <div>No books in your collection, add one above</div>
+        }
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    searchBooks: state.books.searchBooks,
+    collectionBooks: state.books.collectionBooks
+  }
+}
+
+export default connect(mapStateToProps, null)(Dashboard)

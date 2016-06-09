@@ -20,7 +20,8 @@ class BookSearch extends Component {//TODO RENAME ACTIONS, REDUCER... TO SEARCH
   handleSubmit(e) {
     e.preventDefault(e)
     let { book } = this.state
-    this.props.addBook(book)
+    if(book.length>0)
+      this.props.addBook(book)
     e.target.reset()
   }
 
