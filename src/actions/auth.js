@@ -10,7 +10,7 @@ export function signinUser({ email, password }) {
       .then(res => {
         dispatch({ type: AUTH_USER, payload: email })
         localStorage.setItem('token', res.data.token)
-        // localStorage.setItem('email', email)
+        localStorage.setItem('email', email)
         browserHistory.push('/dashboard')
       })
       .catch(() => {
@@ -25,6 +25,7 @@ export function signupUser({ email, password }) { // Could DRY up with signinUse
       .then(res => {
         dispatch({ type: AUTH_USER, payload: email })// flips state to logged in
         localStorage.setItem('token', res.data.token)
+        localStorage.setItem('email', email)
         browserHistory.push('/dashboard')
       })
       .catch(res => {
@@ -41,7 +42,7 @@ export function authError(error) {
 }
 
 export function signoutUser() {
-  localStorage.removeItem('token')
+  localStorage.clear()
   return {
     type: UNAUTH_USER
   }

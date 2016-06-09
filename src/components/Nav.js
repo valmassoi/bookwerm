@@ -71,14 +71,9 @@ class Nav extends Component {
             <ul class="nav navbar-nav">
               <li class={homeClass}><Link to="/" onClick={this.setCollapsed.bind(this)}>Home</Link></li>
             </ul>
-            {/*<form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" />
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>*/}
-            <ul class="nav navbar-nav navbar-right">
 
+            <ul class="nav navbar-nav navbar-right">
+              <li><Link to="/library" onClick={this.setCollapsed.bind(this)}>All Books</Link></li>
               {this.renderLinks()}
 
             </ul>

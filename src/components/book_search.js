@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import * as actions from '../actions/book'
 
-class AddBook extends Component {//TODO RENAME ACTIONS, REDUCER... TO SEARCH
+class BookSearch extends Component {//TODO RENAME ACTIONS, REDUCER... TO SEARCH
 
   constructor(props) {
     super(props);
@@ -29,11 +29,11 @@ class AddBook extends Component {//TODO RENAME ACTIONS, REDUCER... TO SEARCH
       <form role="search" onSubmit={this.handleSubmit.bind(this)}>
         <input
           style={{maxWidth: '300px', float: 'left', marginTop: '5px', marginRight: '5px'}}
-          placeholder="1984" className="form-control"
+          placeholder="1984" class="form-control"
           onChange={e => this.handleInputChange(e)} />
         <button
           style={{marginTop: '5px'}}
-          action="submit" className="btn btn-primary">
+          action="submit" class="btn btn-primary">
           Search
         </button>
       </form>
@@ -42,4 +42,4 @@ class AddBook extends Component {//TODO RENAME ACTIONS, REDUCER... TO SEARCH
 
 }
 
-export default connect(null, actions)(AddBook)
+export default connect(null, actions)(BookSearch)

@@ -5,5 +5,6 @@ export const AUTH_ERROR = 'auth_error'
 export const FETCH_MESSAGE = 'fetch_message'
 
 //book
-export const ADD_BOOK = 'add_book'
+export const BOOK_SEARCH = 'book_search'
+export const SELECT_BOOK = 'select_book'
 export const DELETE_BOOK = 'delete_book'

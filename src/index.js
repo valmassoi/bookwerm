@@ -13,9 +13,10 @@ import { AUTH_USER } from './actions/types'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
-const token = localStorage.getItem('token')
-if (token)
-  store.dispatch({ type: AUTH_USER, payload: 'getFromToken || localStorage?' })
+const token = localStorage.getItem('token'),
+      email = localStorage.getItem('email')
+if (token && email)
+  store.dispatch({ type: AUTH_USER, payload: email })
 
 const app = document.getElementById('app')
 
