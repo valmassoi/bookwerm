@@ -13,6 +13,7 @@ class Library extends Component {
         <Link to="/dashboard">
           <button class="btn btn-primary pull-right">Dashboard</button>
         </Link>
+        <h1>Library</h1>
         {
           allBooks.length > 0 ?
           <BookList mode="all" /> :

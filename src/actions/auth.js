@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE } from './types'
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, UPDATE_PROFILE } from './types'
 
 const API_URL = 'http://localhost:8081'||''
 
@@ -48,15 +48,16 @@ export function signoutUser() {
   }
 }
 
-export function fetchMessage() {//could use redux promise instead of thunk
+export function updateProfile(formProps) {
   return function(dispatch) {
-    axios.get(API_URL, {
+    axios.post(`${API_URL}/profile`, { formProps }, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
+        console.log(res.data);
         dispatch({
-          type: FETCH_MESSAGE,
-          payload: res.data.message
+          type: UPDATE_PROFILE,
+          // payload: res.data.profile
         })
       })
   }

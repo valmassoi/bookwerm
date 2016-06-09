@@ -55,3 +55,18 @@ exports.signup = function(req, res, next) {
 
   })
 }
+
+exports.profile  = (email, formProps) => {
+  const { name, city, state } = formProps
+  console.log("PROFILE", name, city, state);
+  User.findOne({ email }, (err, user) => {
+    if (err) { return next(err); }
+    user.name = name // cant use spread op
+    user.city = city
+    user.state = state
+    console.log(user);
+    user.save( err => {
+      if (err) { return next(err) }
+    })
+  })
+}

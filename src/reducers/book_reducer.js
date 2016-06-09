@@ -12,7 +12,7 @@ export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[
         allBooks: [action.payload, ...state.allBooks],
         searchBooks: []
       }
-    case DELETE_BOOK: // bad to do in reducer?
+    case DELETE_BOOK: // bad to do in reducer?, better to delete by ISBN
       return {
         ...state,
         collectionBooks: _.reject(state.collectionBooks, { title: action.payload }),

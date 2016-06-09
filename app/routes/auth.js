@@ -11,6 +11,13 @@ module.exports = function(app) {
   app.get('/', requireAuth, (req, res) => {
     res.send({ message: 'testing secret code is test123' })
   })
+
+  app.post('/profile', requireAuth, (req, res, next) => {
+    console.log(req.user.email)//TOKEN!
+    Authentication.profile(req.user.email, req.body.formProps, next)
+    res.send({ message: 'profile updated' })
+  })
+
   app.post('/signin', requireSignin, Authentication.signin)
   app.post('/signup', Authentication.signup)
 }

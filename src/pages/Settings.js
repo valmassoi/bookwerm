@@ -12,7 +12,7 @@ export default class Settings extends Component {
   }
 
   handleFormSubmit(formProps) {
-    this.props.editUserInfo(formProps) //TODO action creator
+    this.props.updateProfile(formProps) //TODO action creator
   }
 
   render() {

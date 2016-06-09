@@ -1,4 +1,4 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from '../actions/types'
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, UPDATE_PROFILE } from '../actions/types'
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -8,8 +8,8 @@ export default function(state = {}, action) {
       return { ...state, authenticated: false, error: '', email: ''}
     case AUTH_ERROR:
       return { ...state, error: action.payload }
-    case FETCH_MESSAGE:
-      return { ...state, message: action.payload }
+    case UPDATE_PROFILE:
+      return { ...state, profile: action.payload }
   }
   return state
 }
