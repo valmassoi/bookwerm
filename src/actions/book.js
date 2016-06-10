@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { BOOK_SEARCH, SELECT_BOOK, DELETE_BOOK } from './types'
 
-const API_URL = 'http://localhost:8081'||''
+let API_URL = ''
+if (process.env.NODE_ENV !== 'production')
+  API_URL = 'http://localhost:8081'
 
 export function addBook(book) {//search
   console.log("search:,", book);
