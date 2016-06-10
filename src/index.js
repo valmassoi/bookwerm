@@ -1,4 +1,4 @@
-require('file?name=[name].[ext]!../index.html')// for webpack
+// require('file?name=[name].[ext]!../index.html')// for webpack
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
