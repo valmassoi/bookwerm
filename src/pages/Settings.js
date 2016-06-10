@@ -11,31 +11,38 @@ export default class Settings extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.getProfile()
+  }
+
+  componentWillUnmount() {
+    //TODO clear alert
+  }
+
   handleFormSubmit(formProps) {
     this.props.updateProfile(formProps) //TODO action creator
   }
 
   render() {
-  const { handleSubmit, fields: { name, city, state } } = this.props
+  const { handleSubmit, message, profile, fields: { name, city, state } } = this.props
     return(
       <div>
         <h3>Settings</h3>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <fieldset className="form-group">
+          <fieldset class="form-group">
             <label>Full Name:</label>
-            <input placeholder="Steve Jobs" className="form-control" {...name} />
-
+            <input placeholder={!profile?"":profile.name?profile.name:"Steve Jobs"} class="form-control" {...name} />
           </fieldset>
-          <fieldset className="form-group">
+          <fieldset class="form-group">
             <label>City:</label>
-            <input placeholder="Newport Beach" className="form-control" {...city} />
-
+            <input placeholder={!profile?"":profile.city?profile.city:"Newport Beach"} class="form-control" {...city} />
           </fieldset>
-          <fieldset className="form-group">
+          <fieldset class="form-group">
             <label>State:</label>
-            <input placeholder="CA" className="form-control" {...state} />
+            <input placeholder={!profile?"":profile.state?profile.state:"CA"} class="form-control" {...state} />
           </fieldset>
-          <button action="submit" className="btn btn-primary">Save Changes</button>
+          <button action="submit" class="btn btn-primary">Save Changes</button>
+          <h6>{message}</h6>
         </form>
       </div>
     )
@@ -49,7 +56,7 @@ function validate(formProps) {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error }
+  return { profile: state.auth.profile, message: state.auth.message }
 }
 
 export default reduxForm({

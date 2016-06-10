@@ -23,12 +23,12 @@ function sendEmail(email) {
   })
 }
 
-exports.signin = function(req, res, next) {
+exports.signin = (req, res, next) => {
   //user has email and pass authed, give them a token
   res.send({ token: tokenForUser(req.user) })
 }
 
-exports.signup = function(req, res, next) {
+exports.signup = (req, res, next) => {
   const { email, password } = req.body
 
   if (!email || !password) {
@@ -56,17 +56,20 @@ exports.signup = function(req, res, next) {
   })
 }
 
-exports.profile  = (email, formProps) => {
-  const { name, city, state } = formProps
-  console.log("PROFILE", name, city, state);
+exports.profile  = (email, formProps, res, next) => {
+
   User.findOne({ email }, (err, user) => {
     if (err) { return next(err); }
-    user.name = name // cant use spread op
-    user.city = city
-    user.state = state
-    console.log(user);
+    let message = 'Got User'
+    if (formProps) {
+      user.profile.name = (formProps.name)?formProps.name:user.profile.name
+      user.profile.city = (formProps.city)?formProps.city:user.profile.city
+      user.profile.state = (formProps.state)?formProps.state:user.profile.state
+      message = 'Profile updated'
+    }
     user.save( err => {
       if (err) { return next(err) }
+      res.send({ message, profile: user.profile })
     })
   })
 }

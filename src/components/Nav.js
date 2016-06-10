@@ -11,8 +11,14 @@ class Nav extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.getProfile()
+  }
+
   renderLinks() {
-    if(!this.props.authenticated) {
+    const { authenticated, profile, email } = this.props
+
+    if(!authenticated) {
       return [
         <li class={this.loginClass} key={1}><Link to="/signin" onClick={this.setCollapsed.bind(this)}>Login</Link></li>,
 
@@ -22,7 +28,8 @@ class Nav extends Component {
     else {
       return (
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{this.props.email.split("@")[0]} <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!profile?"":profile.name?profile.name:email.split("@")[0]}
+          <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><Link to="dashboard" onClick={this.setCollapsed.bind(this)}>Dashboard</Link></li>
             <li><Link to="settings" onClick={this.setCollapsed.bind(this)}>Settings</Link></li>
@@ -87,7 +94,8 @@ class Nav extends Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    email: state.auth.email
+    email: state.auth.email,
+    profile: state.auth.profile
   }
 }
 

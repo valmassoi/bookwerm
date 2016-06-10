@@ -14,8 +14,12 @@ module.exports = function(app) {
 
   app.post('/profile', requireAuth, (req, res, next) => {
     console.log(req.user.email)//TOKEN!
-    Authentication.profile(req.user.email, req.body.formProps, next)
-    res.send({ message: 'profile updated' })
+    Authentication.profile(req.user.email, req.body.formProps, res, next)
+  })
+
+  app.get('/profile', requireAuth, (req, res, next) => {
+    console.log(req.user.email)//TOKEN!
+    Authentication.profile(req.user.email, null, res, next)
   })
 
   app.post('/signin', requireSignin, Authentication.signin)

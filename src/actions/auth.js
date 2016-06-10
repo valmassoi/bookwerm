@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, UPDATE_PROFILE } from './types'
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, UPDATE_PROFILE, GET_PROFILE } from './types'
 
 const API_URL = 'http://localhost:8081'||''
 
@@ -57,7 +57,22 @@ export function updateProfile(formProps) {
         console.log(res.data);
         dispatch({
           type: UPDATE_PROFILE,
-          // payload: res.data.profile
+          payload: res.data
+        })
+      })
+  }
+}
+
+export function getProfile() {
+  return function(dispatch) {
+    axios.get(`${API_URL}/profile`, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(res => {
+        console.log(res.data.profile);
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data.profile
         })
       })
   }
