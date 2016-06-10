@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js",
+    "start": "node ./server.js",
+    "nodemon": "nodemon ./server.js",
     "dev": "webpack-dev-server --content-base src --host 192.168.1.108 --inline --hot --history-api-fallback",
     "deploy": "NODE_ENV=production webpack"
   },
