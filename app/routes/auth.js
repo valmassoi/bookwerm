@@ -12,7 +12,7 @@ module.exports = function(app) {
     res.send({ message: 'testing secret code is test123' })
   })
 
-  app.post('/profile', requireAuth, (req, res, next) => {
+  app.post('/profile', requireAuth, (req, res, next) => {//change to PUT?
     console.log(req.user.email)//TOKEN!
     Authentication.profile(req.user.email, req.body.formProps, res, next)
   })

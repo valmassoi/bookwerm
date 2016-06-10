@@ -25,17 +25,17 @@ function sendEmail(email) {
 
 exports.signin = (req, res, next) => {
   //user has email and pass authed, give them a token
-  res.send({ token: tokenForUser(req.user) })
+  console.log("req user@!!", req.user.profile);
+  res.send({ token: tokenForUser(req.user), profile: req.user.profile })
 }
 
 exports.signup = (req, res, next) => {
   const { email, password } = req.body
-
   if (!email || !password) {
     return res.status(422).send({ error: 'Must provide email and password' })
   }
 
-  User.findOne({ email: email}, (err, existingUser) => { //see if user with given email exists
+  User.findOne({ email }, (err, existingUser) => { //see if user with given email exists
     if(err) {return next(err)}
 
     if(existingUser) { //if does: return error
@@ -65,11 +65,11 @@ exports.profile  = (email, formProps, res, next) => {
       user.profile.name = (formProps.name)?formProps.name:user.profile.name
       user.profile.city = (formProps.city)?formProps.city:user.profile.city
       user.profile.state = (formProps.state)?formProps.state:user.profile.state
+      user.save( err => {
+        if (err) { return next(err) }
+      })
       message = 'Profile updated'
     }
-    user.save( err => {
-      if (err) { return next(err) }
-      res.send({ message, profile: user.profile })
-    })
+    res.send({ message, profile: user.profile })
   })
 }

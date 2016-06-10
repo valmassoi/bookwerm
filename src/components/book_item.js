@@ -7,7 +7,7 @@ const BookItem = ({ book, mode, selectBook, deleteBook }) => {
 
   let deleteBtn = null
   if(mode=="user_collection"){
-    deleteBtn = <button onClick={() => deleteBook(book)}><span class="glyphicon glyphicon-remove pull-right" aria-label="true" style={{ position: 'absolute', zIndex:'3', right:'10px', top:'10px', color:'#e50000', fontSize:'20px', textShadow: '0px 0px 7px white', WebkitTextStroke: '1px black' }}/></button>
+    deleteBtn = <button class="pull-right" style={{ position: 'absolute', zIndex:'3', right:'5px', top:'10px', border: 'none', backgroundColor:'Transparent'}} onClick={() => deleteBook(book)}><span class="glyphicon glyphicon-remove" aria-label="true" style={{color:'#e50000', fontSize:'20px', textShadow: '0px 0px 7px white', WebkitTextStroke: '1px black' }} /></button>
   }
 
   let selectBtn = null

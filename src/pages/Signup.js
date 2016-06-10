@@ -8,6 +8,10 @@ class Signup extends Component {
     this.props.signupUser(formProps) //action creator
   }
 
+  componentWillUnmount() {
+    this.props.authError('')
+  }
+
   renderAlert() {
     if(this.props.errorMessage) {//FIX reset on unmount
       return (

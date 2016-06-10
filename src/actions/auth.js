@@ -8,9 +8,9 @@ export function signinUser({ email, password }) {
   return function(dispatch) { // thunk
     axios.post(`${API_URL}/signin`, { email, password })
       .then(res => {
-        dispatch({ type: AUTH_USER, payload: email })
+        dispatch({ type: AUTH_USER, payload: { email, profile: res.data.profile } })
         localStorage.setItem('token', res.data.token)
-        localStorage.setItem('email', email)
+        localStorage.setItem('email', email)// TODO dont need?
         browserHistory.push('/dashboard')
       })
       .catch(() => {
@@ -23,9 +23,9 @@ export function signupUser({ email, password }) { // Could DRY up with signinUse
   return function(dispatch) {
     axios.post(`${API_URL}/signup`, { email, password })
       .then(res => {
-        dispatch({ type: AUTH_USER, payload: email })// flips state to logged in
+        dispatch({ type: AUTH_USER, payload: { email, profile: '' } })// flips state to logged in
         localStorage.setItem('token', res.data.token)
-        localStorage.setItem('email', email)
+        localStorage.setItem('email', email)// TODO dont need?
         browserHistory.push('/dashboard')
       })
       .catch(res => {
