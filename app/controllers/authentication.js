@@ -55,7 +55,7 @@ exports.signup = (req, res, next) => {
 
   })
 }
-
+//TODO move to another controller
 exports.profile  = (email, formProps, res, next) => {
 
   User.findOne({ email }, (err, user) => {
@@ -72,4 +72,17 @@ exports.profile  = (email, formProps, res, next) => {
     }
     res.send({ message, profile: user.profile })
   })
+}
+//TODO move to another controller
+exports.book  = (email, book, res, next) => {
+  console.log("push", book);
+  User.findOneAndUpdate(
+    { email },
+    {$push: {"books": book}}, //TODO, add field(s) for trading
+    {safe: true, upsert: true, new : true},
+    (err, user) => {
+      if (err) { return next(err); }
+      res.send({ add: 'success' })
+    }
+  )
 }

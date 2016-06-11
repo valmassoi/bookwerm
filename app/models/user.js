@@ -6,28 +6,27 @@ const bcrypt = require('bcrypt-nodejs')
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true }, // Force unique
   password: String,
-  profile: { name: String, city: String, state: String }
+  profile: { name: String, city: String, state: String },
+  books: Array//[{ type : Array , default: [{ title: String, author: String, img: String }] }]  //[{ title: String, author: String, img: String }]
+
 })
 
 // On save Hook, encrypt password
 userSchema.pre('save', function(next) { // run before save DONT DO ARROW FUNCTION bind this
   const user = this
-  console.log("PRE", user) // SKIP if already hashed!!!
-  if(user.password.substring(0, 7)=='$2a$10$') {// TODO improve check
-    console.log("skip salt");
-    next()
-  }
-  else {
-    bcrypt.genSalt(10, (err, salt) => {
-      console.log("salting");
+
+  if (!user.isModified('password'))
+    return next()
+
+  bcrypt.genSalt(10, (err, salt) => {
+    console.log("salting");
+    if (err) { return next(err) }
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
       if (err) { return next(err) }
-      bcrypt.hash(user.password, salt, null, (err, hash) => {
-        if (err) { return next(err) }
-        user.password = hash
-        next()
-      })
+      user.password = hash
+      next()
     })
-  }
+  })
 })
 
 userSchema.methods.comparePassword = function(canidatePassword, callback) {

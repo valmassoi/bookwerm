@@ -35,16 +35,16 @@ module.exports = function(app) {
       })
   })
 
-  app.post('/api/book', requireAuth, (req, res) => {
+  app.post('/api/book', requireAuth, (req, res, next) => {
     console.log(req.user.email)
-    console.log(req.body.book)
-    //TODO ADD TO MONGO
-    res.send({ add: 'success' })
+
+    Authentication.book(req.user.email, req.body.book, res, next)  //TODO ADD TO MONGO
   })
 
   app.delete('/api/book', requireAuth, (req, res) => {
     console.log(req.user.email)//TOKEN!
     let { book } = req.body
+    //TODO delete from mongo
     console.log(book);
     res.send({ del: 'success' })
   })

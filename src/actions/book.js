@@ -2,7 +2,7 @@ import axios from 'axios'
 import { BOOK_SEARCH, SELECT_BOOK, DELETE_BOOK } from './types'
 
 let API_URL = ''
-if (process.env.NODE_ENV !== 'production')
+if (process.env.NODE_ENV !== 'production')//TODO doesnt work
   API_URL = 'http://localhost:8081'
 
 export function addBook(book) {//search
@@ -26,7 +26,6 @@ export function selectBook(book) {
     })
       .then(res => {
         console.log(res.data)
-        //TODO MONGO
         dispatch({ type: SELECT_BOOK, payload: book })
       })
       .catch(res => {
