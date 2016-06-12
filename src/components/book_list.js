@@ -11,7 +11,7 @@ class BookList extends Component {
   }
 
   selectBook(book) {
-    this.props.selectBook(book)//TODO
+    this.props.selectBook(book)
   }
 
   render() {

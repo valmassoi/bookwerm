@@ -1,10 +1,16 @@
-import { BOOK_SEARCH, SELECT_BOOK, DELETE_BOOK } from '../actions/types'
+import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK } from '../actions/types'
 import _ from 'lodash'
 
 export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[] }, action) {
   switch (action.type) {
     case BOOK_SEARCH:
       return { ...state, searchBooks: action.payload}
+    case GET_BOOKS:
+      return {
+        ...state,
+        collectionBooks: action.payload.collection,
+        allBooks: action.payload.all
+      }
     case SELECT_BOOK:
       return {
         ...state,

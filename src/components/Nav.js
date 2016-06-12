@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import { Link, browserHistory } from "react-router"
 import { connect } from 'react-redux'
-import * as actions from '../actions/auth'
+import { bindActionCreators } from 'redux'
+import * as authActions from '../actions/auth'
+import * as bookActions from '../actions/book'
 
 class Nav extends Component {
   constructor() {
@@ -12,7 +14,8 @@ class Nav extends Component {
   }
 
   componentWillMount() {
-    this.props.getProfile()
+    this.props.authActions.getProfile()
+    this.props.bookActions.getBooks()//dont need here?
   }
 
   renderLinks() {
@@ -42,7 +45,7 @@ class Nav extends Component {
   }
 
   logout() {
-    this.props.signoutUser()
+    this.props.authActions.signoutUser()
     browserHistory.push('/')
   }
 
@@ -99,4 +102,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(Nav)
+function mapDispatchToProps(dispatch) {
+  return {
+    authActions: bindActionCreators(authActions, dispatch),
+    bookActions: bindActionCreators(bookActions, dispatch)
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

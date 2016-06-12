@@ -7,7 +7,7 @@ const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true }, // Force unique
   password: String,
   profile: { name: String, city: String, state: String },
-  books: Array//[{ type : Array , default: [{ title: String, author: String, img: String }] }]  //[{ title: String, author: String, img: String }]
+  books: Array
 
 })
 

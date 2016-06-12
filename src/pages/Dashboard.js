@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import AddBook from '../components/book_search'
 import BookList from '../components/book_list'
+import * as bookActions from '../actions/book'
 
 import Trades from '../components/trades'
 
@@ -16,7 +17,7 @@ class Dashboard extends Component {
   }
 
   componentWillMount() { //load my collection, and trade req
-
+    this.props.getBooks()
   }
 
   render() {
@@ -51,4 +52,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, null)(Dashboard)
+export default connect(mapStateToProps, bookActions)(Dashboard)

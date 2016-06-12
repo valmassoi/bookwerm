@@ -11,8 +11,7 @@ module.exports = function(app) {
 
   app.get('/api/book/:title', (req, res) => {
     let { title } = req.params
-    console.log(title);
-    let bookData = {}
+    // let bookData = {}
     const GOOGLE_API_URL = 'https://www.googleapis.com/books/v1/volumes?q='
     axios.get(`${GOOGLE_API_URL}${title}`)
       .then(json => {// abstraction
@@ -35,10 +34,13 @@ module.exports = function(app) {
       })
   })
 
-  app.post('/api/book', requireAuth, (req, res, next) => {
-    console.log(req.user.email)
+  app.get('/api/books', requireAuth, (req, res, next) => {//no auth give just all
+    console.log("GETING BOOKS")
+    Authentication.books(req.user.books, res, next)
+  })
 
-    Authentication.book(req.user.email, req.body.book, res, next)  //TODO ADD TO MONGO
+  app.post('/api/book', requireAuth, (req, res, next) => {
+    Authentication.book(req.user.email, req.body.book, res, next)
   })
 
   app.delete('/api/book', requireAuth, (req, res) => {

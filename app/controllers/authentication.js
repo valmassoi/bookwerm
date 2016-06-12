@@ -75,14 +75,35 @@ exports.profile  = (email, formProps, res, next) => {
 }
 //TODO move to another controller
 exports.book  = (email, book, res, next) => {
-  console.log("push", book);
+  console.log("push", book);//or delete
   User.findOneAndUpdate(
     { email },
-    {$push: {"books": book}}, //TODO, add field(s) for trading
+    {$push: {"books": book}}, //TODO, add field(s) for trading, id
     {safe: true, upsert: true, new : true},
     (err, user) => {
       if (err) { return next(err); }
       res.send({ add: 'success' })
+    }
+  )
+}
+
+//TODO move to another controller
+exports.books  = (userBooks, res, next) => {//email
+  console.log("AGGREGATING");
+  User.aggregate(
+    // {$project: {books}},
+    { "$group": {
+        _id: null,//"$email"
+        books: { $push: "$books" }
+    }},
+    // { "$sort": { "": -1 } } //by date added
+    (err, result) => {
+      if (err) { return next(err); }
+      console.log("AG res:", result[0].books);
+      res.send({
+        all:result[0].books,
+        collection:userBooks
+      })
     }
   )
 }

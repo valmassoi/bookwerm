@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { BOOK_SEARCH, SELECT_BOOK, DELETE_BOOK } from './types'
+import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK } from './types'
+import _ from 'lodash'
 
 let API_URL = ''
 if (process.env.NODE_ENV !== 'production')//TODO doesnt work
@@ -12,6 +13,24 @@ export function addBook(book) {//search
       .then(res => {
         console.log(res.data);
         dispatch({ type: BOOK_SEARCH, payload: res.data })
+      })
+      .catch(res => {
+        //err
+      })
+  }
+}
+
+export function getBooks() {
+  return function(dispatch) {
+    axios.get(`${API_URL}/api/books`,{
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(res => {
+        console.log(res.data)
+        dispatch({ type: GET_BOOKS, payload: {
+          collection:res.data.collection, all: _.flattenDeep(res.data.all)
+          }
+        })
       })
       .catch(res => {
         //err
