@@ -15,6 +15,19 @@ const BookItem = ({ book, mode, selectBook, deleteBook, requestBook }) => {
     tradeBtn = <button onClick={() => requestBook(book)} class="btn btn-primary" style={{position: 'absolute', width:'90px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Trade</button>
   }
 
+  let approveBtn = null
+  if(mode=="queue" && true) {//!already approve request by me
+    approveBtn = <button onClick={() => approveBook(book)} class="btn btn-primary" style={{position: 'absolute', width:'110px', marginLeft: 'auto', marginRight: 'auto', top:'95px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Approve</button>
+  }
+
+  let rejectBtn = null
+  if(mode=="queue" && true) {//!already reject request by me
+    rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'110px', marginLeft: 'auto', marginRight: 'auto', top:'145px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Reject</button>
+  }
+  if(mode=="approved" && true) {//!already reject request by me
+    rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'130px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Nevermind</button>
+  }
+
   let selectBtn = null
   if(mode=="search"){
     selectBtn = <button onClick={() => selectBook(book)} class="btn btn-primary" style={{position: 'absolute', width:'80px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}>Add</button>
@@ -30,6 +43,8 @@ const BookItem = ({ book, mode, selectBook, deleteBook, requestBook }) => {
 
       {selectBtn}
       {tradeBtn}
+      {approveBtn}
+      {rejectBtn}
       <h5 style={{position: 'absolute', bottom:'5px', background:'white'}}>{title}</h5>
 
     </li>

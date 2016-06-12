@@ -31,14 +31,14 @@ class Dashboard extends Component {
         <h1>Dashboard</h1>
         <h3>Trade Requests</h3>
         <Trades />
-        <h3>Add to your collection</h3>
+        <h3 style={style}>Add to my collection</h3>
         <AddBook />
         <BookList mode="search" />
-        <h3 style={style}>Your Collection</h3>
+        <h3 style={style}>My Collection</h3>
         {
           collectionBooks.length > 0 ?
           <BookList mode="user_collection" /> :
-          <div>No books in your collection, add one above</div>
+          <div>No books in collection, add one above</div>
         }
       </div>
     )

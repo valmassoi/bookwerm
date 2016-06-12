@@ -33,7 +33,7 @@ exports.trade = (email, book, res, next) => {
 
     (err, data) => {
       if (err) { return next(err); }
-
+      //Could send email to owner here
       console.log(data);
 
       res.send({ trade: 'requested' })
