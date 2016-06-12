@@ -11,23 +11,26 @@ const BookItem = ({ book, mode, selectBook, deleteBook, requestBook, approveBook
   }
 
   let tradeBtn = null
-  if(mode=="all" && true) {//!already trade request by me
+  if(mode=="all") {
     tradeBtn = <button onClick={() => requestBook(book)} class="btn btn-primary" style={{position: 'absolute', width:'90px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Trade</button>
   }
 
   let approveBtn = null
-  if(mode=="queue" && true) {//!already approve request by me
+  if(mode=="queue") {
     approveBtn = <button onClick={() => approveBook(book)} class="btn btn-primary" style={{position: 'absolute', width:'110px', marginLeft: 'auto', marginRight: 'auto', top:'95px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Approve</button>
   }
 
   let rejectBtn = null
-  if(mode=="queue" && true) {//!already reject request by me
+  if(mode=="queue") {
     rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'110px', marginLeft: 'auto', marginRight: 'auto', top:'145px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Reject</button>
   }
-  if(mode=="approved" && true) {//!already reject request by me
+  let borrower, link = null
+  if(mode=="approved" || mode=="wishlist") {
     rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'130px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Nevermind</button>
+    borrower=book.requester//TODO change for wishlister to owner
+    link = `mailto:${borrower}?Subject=Give%20me%20my%20book%20back`
   }
-  if(mode=="borrowing" && true) {//TODO
+  if(mode=="borrowing") {
     rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'130px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Give Back</button>
   }
 
@@ -49,7 +52,10 @@ const BookItem = ({ book, mode, selectBook, deleteBook, requestBook, approveBook
       {tradeBtn}
       {approveBtn}
       {rejectBtn}
-      <h5 style={{position: 'absolute', bottom:'5px', background:'white'}}>{title}</h5>
+      <div style={{position: 'absolute', bottom:'5px', left:'5px', paddingLeft:'5px', width:'190px', background:'rgba(255,255,255,0.7)'}}>
+        <h6>{title}</h6>
+        {borrower?<a href={link} target="_top">{borrower}</a>:""}
+      </div>
 
     </li>
   )

@@ -49,9 +49,9 @@ exports.change = (email, book, res, next, status) => {
 
     (err, data) => {
       if (err) { return next(err); }
-      //Could send email to owner here
+      //Could send email here
       console.log(data);
-      res.send({ trade: 'requested' })
+      res.send({ trade: status })
     }
   )
 }

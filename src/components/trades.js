@@ -18,7 +18,7 @@ class Trades extends Component {
       <h4 style={style}>Requests for me:</h4>
       <h6 style={style}>Queue:</h6>
       <BookList mode="queue" />
-      <h6 style={style}>Approved:</h6>
+      <h6 style={style}>Loaned Out:</h6>
       <BookList mode="approved" />
       </div>
     )

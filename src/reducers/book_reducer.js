@@ -9,7 +9,7 @@ export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[
       return {
         ...state,
         collectionBooks: action.payload.collection,
-        allBooks: action.payload.all
+        allBooks: action.payload.all //TODO HIDE TRADING BOOKS
       }
     case SELECT_BOOK:
       return {
@@ -20,15 +20,19 @@ export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[
       }
     case REQUEST_BOOK:
       return {
-        ...state
+        ...state,
+        allBooks: _.reject(state.allBooks, { title: action.payload.title })
       }
     case APPROVE_BOOK:
+
       return {
-        ...state
+        ...state,
+        collectionBooks: [..._.reject(state.collectionBooks, { title: action.payload.title }), action.payload] //replace with new status
       }
     case REJECT_BOOK:
       return {
-        ...state
+        ...state,
+        collectionBooks: [..._.reject(state.collectionBooks, { title: action.payload.title }), action.payload]
       }
     case DELETE_BOOK: // bad to do in reducer?, better to delete by ISBN
       return {

@@ -1,10 +1,9 @@
 import axios from 'axios'
 import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK, REQUEST_BOOK, APPROVE_BOOK, REJECT_BOOK } from './types'
+import { browserHistory } from 'react-router'
 import _ from 'lodash'
 
-let API_URL = ''
-if (process.env.NODE_ENV !== 'production')//TODO doesnt work
-  API_URL = 'http://localhost:8081'
+let API_URL = '' // http://localhost:8081
 
 export function addBook(book) {//search
   console.log("search:,", book);
@@ -56,6 +55,7 @@ export function requestBook(book) {
       book }, { headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
+        browserHistory.push('/dashboard')
         dispatch({ type: REQUEST_BOOK, payload: book })
       })
       .catch(res => {
@@ -70,7 +70,8 @@ export function approveBook(book) {
       book }, { headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
-        dispatch({ type: APPROVE_BOOK, payload: book })//get userbooks payload
+        book.status=res.data.trade
+        dispatch({ type: APPROVE_BOOK, payload: book })
       })
       .catch(res => {
         //err
@@ -84,7 +85,8 @@ export function rejectBook(book) {
       book }, { headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
-        dispatch({ type: REJECT_BOOK, payload: book })//get userbooks payload
+        book.status=res.data.trade
+        dispatch({ type: REJECT_BOOK, payload: book })
       })
       .catch(res => {
         //err

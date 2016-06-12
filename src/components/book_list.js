@@ -33,10 +33,9 @@ class BookList extends Component {
     if (mode=="search")
       books = searchBooks
     if (mode=="user_collection")
-      books = collectionBooks
-    if (mode=="all") //all but own
-      books = _.differenceBy(allBooks, collectionBooks, 'title')
-      //TODO REMOVE TRADING BOOKS
+      books = _.filter(collectionBooks, {'owner':email})
+    if (mode=="all") //all but own, or trading
+      books = _.reject(_.reject(_.differenceBy(allBooks, collectionBooks, 'title'), { 'requester':email, status:null }), { status:true })
 
     if (mode=="wishlist") //allbooks that has me as requester, status null
       books = _.filter(allBooks, {'requester':email, 'status':null})

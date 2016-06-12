@@ -2,9 +2,7 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, UPDATE_PROFILE, GET_PROFILE } from './types'
 
-let API_URL = ''
-if (process.env.NODE_ENV !== 'production')//TODO doesnt work
-  API_URL = 'http://localhost:8081'
+let API_URL = '' // http://localhost:8081
 
 export function signinUser({ email, password }) {
   return function(dispatch) { // thunk
