@@ -3,7 +3,6 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, UPDATE_PROFILE, GET_PROFILE } from 
 export default function(state = {}, action) {
   switch (action.type) {
     case AUTH_USER:
-      console.log("payload", action.payload);
       return { ...state, authenticated: true, error: '', email: action.payload.email, profile: action.payload.profile}
     case UNAUTH_USER:
       return { ...state, authenticated: false, error: '', email: '', profile: ''}

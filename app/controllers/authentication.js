@@ -52,10 +52,9 @@ exports.signup = (req, res, next) => {
       res.json({ token: tokenForUser(user) })
       sendEmail(email)
     })
-
   })
 }
-//TODO move to another controller
+
 exports.profile  = (email, formProps, res, next) => {
 
   User.findOne({ email }, (err, user) => {
@@ -72,48 +71,4 @@ exports.profile  = (email, formProps, res, next) => {
     }
     res.send({ message, profile: user.profile })
   })
-}
-//TODO move to another controller
-exports.book  = (email, book, res, next, cmd) => {
-  console.log(cmd, book)
-  if(cmd=="add") {
-    User.findOneAndUpdate(
-      { email },
-      {$push: {"books": book}}, //TODO, add field(s) for trading, id
-      {safe: true, upsert: true, new : true},
-      (err, user) => {
-        if (err) { return next(err); }
-        res.send({ add: 'success' })
-      }
-    )
-  }
-  else { //DRY?
-    User.findOneAndUpdate(
-      { email },
-      { $pull: { books: { title: book } } }, //NOTE book here is just title
-      (err, user) => {
-        if (err) { return next(err); }
-        res.send({ del: 'success' })
-      }
-    )
-  }
-}
-
-//TODO move to another controller
-exports.books  = (userBooks, res, next) => {//email
-  console.log("AGGREGATING");
-  User.aggregate(
-    { "$group": {
-        _id: null,//"$email"
-        books: { $push: "$books" }
-    }},
-    // { "$sort": { "": -1 } } //by date added
-    (err, result) => {
-      if (err) { return next(err); }
-      res.send({
-        all:result[0].books,
-        collection:userBooks
-      })
-    }
-  )
 }

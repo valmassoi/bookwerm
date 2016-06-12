@@ -56,7 +56,6 @@ export function updateProfile(formProps) {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
-        console.log(res.data);
         dispatch({
           type: UPDATE_PROFILE,
           payload: res.data
@@ -71,7 +70,6 @@ export function getProfile() {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
-        console.log(res.data.profile);
         dispatch({
           type: GET_PROFILE,
           payload: res.data.profile

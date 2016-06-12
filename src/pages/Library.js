@@ -17,7 +17,7 @@ class Library extends Component {
         {
           allBooks.length > 0 ?
           <BookList mode="all" /> :
-          <h3>No books added yet, be the first werm!</h3>
+          <h3>No books added yet, wait for other werms!</h3>
         }
       </div>
     )

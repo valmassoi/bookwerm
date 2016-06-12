@@ -14,21 +14,24 @@ class BookList extends Component {
     this.props.selectBook(book)
   }
 
+  requestBook(book) {
+    this.props.requestBook(book)
+  }
+
   render() {
     let { mode, searchBooks, collectionBooks, allBooks } = this.props
     let books = []
     if (mode=="search")
       books = [...searchBooks]
-    if (mode=="user_collection"){
+    if (mode=="user_collection")
       books = [...collectionBooks]
-    }
-    if (mode=="all")
-      books = [...allBooks]
+    if (mode=="all") //all but own
+      books = _.differenceBy(allBooks, collectionBooks, 'title')
     return (
       <ul class="list-group" style={{marginTop: '5px'}}>
         {books.map((book, i) => {
           return (
-            <BookItem book={book} key={book.title+i} selectBook={book => this.selectBook(book)} deleteBook={book => this.deleteBook(book)} mode={mode} />
+            <BookItem book={book} key={book.title+i} selectBook={book => this.selectBook(book)} requestBook={book => this.requestBook(book)} deleteBook={book => this.deleteBook(book)} mode={mode} />
           )
         })}
       </ul>

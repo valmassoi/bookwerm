@@ -1,6 +1,6 @@
 'use strict'
 
-const Authentication = require('../controllers/authentication')
+const Book = require('../controllers/book')
 const passportService = require('../services/passport')
 const passport = require('passport')
 const axios = require('axios')
@@ -36,17 +36,20 @@ module.exports = function(app) {
 
   app.get('/api/books', requireAuth, (req, res, next) => {//no auth give just all
     console.log("GETING BOOKS")
-    Authentication.books(req.user.books, res, next)
+    Book.all(req.user.books, res, next)
   })
 
   app.post('/api/book', requireAuth, (req, res, next) => {
-    Authentication.book(req.user.email, req.body.book, res, next, "add")
+    Book.add(req.user.email, req.body.book, res, next)
+  })
+
+  app.post('/api/book/trade', requireAuth, (req, res, next) => {
+    Book.trade(req.user.email, req.body.book, res, next)
   })
 
   app.delete('/api/book/:book', requireAuth, (req, res, next) => {
     console.log(req.user.email)//TOKEN!
     let { book } = req.params
-    Authentication.book(req.user.email, book, res, next, "delete")
+    Book.delete(req.user.email, book, res, next)
   })
-
 }

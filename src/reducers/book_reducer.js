@@ -1,4 +1,4 @@
-import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK } from '../actions/types'
+import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK, REQUEST_BOOK } from '../actions/types'
 import _ from 'lodash'
 
 export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[] }, action) {
@@ -17,6 +17,10 @@ export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[
         collectionBooks: [action.payload, ...state.collectionBooks],
         allBooks: [action.payload, ...state.allBooks],
         searchBooks: []
+      }
+    case REQUEST_BOOK:
+      return {
+        ...state
       }
     case DELETE_BOOK: // bad to do in reducer?, better to delete by ISBN
       return {
