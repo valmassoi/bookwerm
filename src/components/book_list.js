@@ -28,7 +28,7 @@ class BookList extends Component {
   }
 
   render() {
-    let { mode, searchBooks, collectionBooks, allBooks } = this.props
+    let { mode, searchBooks, collectionBooks, allBooks, email } = this.props
     let books = []
     if (mode=="search")
       books = searchBooks
@@ -37,11 +37,11 @@ class BookList extends Component {
     if (mode=="all") //all but own
       books = _.differenceBy(allBooks, collectionBooks, 'title')
 
-    if (mode=="wishlist")
-      books = []
-    if (mode=="borrowing")
-      books = []
-    if (mode=="queue") {//collectionBooks that have a requester, status false
+    if (mode=="wishlist")//allbooks that has me as requester, status null
+      books = _.filter(allBooks, {'requester':email, 'status':null})
+    if (mode=="borrowing")//allbooks that has me as requester, status true
+      books = _.filter(allBooks, {'requester':email, 'status':true})
+    if (mode=="queue") {//collectionBooks that have a requester, status null
       books = _.filter(collectionBooks, {'status':null})
     }
     if (mode=="approved")//collectionBooks that have a requester, status true
@@ -63,7 +63,8 @@ function mapStateToProps(state) {
   return {
     searchBooks: state.books.searchBooks,
     collectionBooks: state.books.collectionBooks,
-    allBooks: state.books.allBooks
+    allBooks: state.books.allBooks,
+    email: state.auth.email
   }
 }
 

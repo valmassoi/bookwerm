@@ -27,6 +27,10 @@ const BookItem = ({ book, mode, selectBook, deleteBook, requestBook }) => {
   if(mode=="approved" && true) {//!already reject request by me
     rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'130px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Nevermind</button>
   }
+  if(mode=="borrowing" && true) {//TODO
+    rejectBtn = <button onClick={() => rejectBook(book)} class="btn btn-danger" style={{position: 'absolute', width:'130px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Give Back</button>
+  }
+
 
   let selectBtn = null
   if(mode=="search"){
