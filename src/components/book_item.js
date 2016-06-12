@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BookItem = ({ book, mode, selectBook, deleteBook, requestBook }) => {
+const BookItem = ({ book, mode, selectBook, deleteBook, requestBook, approveBook, rejectBook }) => {
   let { title } = book
   if(title.length>32)
     title = title.substring(0, 35)+"..."

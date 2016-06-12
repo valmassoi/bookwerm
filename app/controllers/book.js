@@ -29,13 +29,28 @@ exports.trade = (email, book, res, next) => {
   console.log("trade", book.title, "with", book.owner);
   User.update(
     { email: book.owner, "books.title":book.title },//TODO should be ISBN
-    {$set: { "books.$.requester":email, "books.$.status":false } },
+    {$set: { "books.$.requester":email, "books.$.status":null } },
 
     (err, data) => {
       if (err) { return next(err); }
       //Could send email to owner here
       console.log(data);
+      res.send({ trade: 'requested' })
+    }
+  )
+}
 
+exports.change = (email, book, res, next, status) => {
+  let test = "testing new titles"
+  console.log("trade", book.title, "with", book.owner);
+  User.update(
+    { email: book.owner, "books.title":book.title },//TODO should be ISBN
+    {$set: { "books.$.status":status } },
+
+    (err, data) => {
+      if (err) { return next(err); }
+      //Could send email to owner here
+      console.log(data);
       res.send({ trade: 'requested' })
     }
   )

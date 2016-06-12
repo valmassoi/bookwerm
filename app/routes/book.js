@@ -47,6 +47,16 @@ module.exports = function(app) {
     Book.trade(req.user.email, req.body.book, res, next)
   })
 
+  app.post('/api/book/trade/:action', requireAuth, (req, res, next) => {
+    let { action } = req.params
+    let status = null
+    if (action=="approve")
+      status = true
+    if (action=="reject")
+      status = false
+    Book.change(req.user.email, req.body.book, res, next, status)
+  })
+
   app.delete('/api/book/:book', requireAuth, (req, res, next) => {
     console.log(req.user.email)//TOKEN!
     let { book } = req.params

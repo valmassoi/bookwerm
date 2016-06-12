@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK, REQUEST_BOOK } from './types'
+import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK, REQUEST_BOOK, APPROVE_BOOK, REJECT_BOOK } from './types'
 import _ from 'lodash'
 
 let API_URL = ''
@@ -57,6 +57,34 @@ export function requestBook(book) {
     })
       .then(res => {
         dispatch({ type: REQUEST_BOOK, payload: book })
+      })
+      .catch(res => {
+        //err
+      })
+  }
+}
+
+export function approveBook(book) {
+  return function(dispatch) {
+    axios.post(`${API_URL}/api/book/trade/approve`, {//PUT?
+      book }, { headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(res => {
+        dispatch({ type: APPROVE_BOOK, payload: book })//get userbooks payload
+      })
+      .catch(res => {
+        //err
+      })
+  }
+}
+
+export function rejectBook(book) {
+  return function(dispatch) {
+    axios.post(`${API_URL}/api/book/trade/reject`, {//PUT?
+      book }, { headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(res => {
+        dispatch({ type: REJECT_BOOK, payload: book })//get userbooks payload
       })
       .catch(res => {
         //err
