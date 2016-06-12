@@ -40,15 +40,13 @@ module.exports = function(app) {
   })
 
   app.post('/api/book', requireAuth, (req, res, next) => {
-    Authentication.book(req.user.email, req.body.book, res, next)
+    Authentication.book(req.user.email, req.body.book, res, next, "add")
   })
 
-  app.delete('/api/book', requireAuth, (req, res) => {
+  app.delete('/api/book/:book', requireAuth, (req, res, next) => {
     console.log(req.user.email)//TOKEN!
-    let { book } = req.body
-    //TODO delete from mongo
-    console.log(book);
-    res.send({ del: 'success' })
+    let { book } = req.params
+    Authentication.book(req.user.email, book, res, next, "delete")
   })
 
 }

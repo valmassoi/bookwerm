@@ -56,8 +56,8 @@ export function selectBook(book) {
 export function deleteBook(book) {
   console.log("delete:,", book);
   return function(dispatch) {
-    axios.delete(`${API_URL}/api/book`, { // TODO CHANGE TO URI?
-      book, headers: { authorization: localStorage.getItem('token') }
+    axios.delete(`${API_URL}/api/book/${book}`, { // TODO CHANGE TO URI?
+      headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {
         //TODO MONGO
