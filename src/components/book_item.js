@@ -11,7 +11,7 @@ const BookItem = ({ book, mode, selectBook, deleteBook, requestBook, approveBook
   }
 
   let tradeBtn = null
-  if(mode=="all") {
+  if(mode=="all" && localStorage.getItem('token')) {
     tradeBtn = <button onClick={() => requestBook(book)} class="btn btn-primary" style={{position: 'absolute', width:'90px', marginLeft: 'auto', marginRight: 'auto', top:'120px', left: '0', right: '0'}}><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Trade</button>
   }
 

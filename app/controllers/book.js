@@ -25,7 +25,6 @@ exports.delete = (email, book, res, next) => {
 }
 
 exports.trade = (email, book, res, next) => {
-  let test = "testing new titles"
   console.log("trade", book.title, "with", book.owner);
   User.update(
     { email: book.owner, "books.title":book.title },//TODO should be ISBN
@@ -41,7 +40,6 @@ exports.trade = (email, book, res, next) => {
 }
 
 exports.change = (email, book, res, next, status) => {
-  let test = "testing new titles"
   console.log("trade", book.title, "with", book.owner);
   User.update(
     { email: book.owner, "books.title":book.title },//TODO should be ISBN

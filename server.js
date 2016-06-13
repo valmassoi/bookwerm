@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'production'){
   app.use(morgan('combined'))
 }
 app.use(cors())
-// app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: '*/*' }))
 app.enable('trust proxy')
 router(app)

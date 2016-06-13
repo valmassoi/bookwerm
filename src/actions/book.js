@@ -19,8 +19,11 @@ export function addBook(book) {//search
 }
 
 export function getBooks() {
+  let guest = ''
+  if(!localStorage.getItem('token'))
+    guest = '/guest'
   return function(dispatch) {
-    axios.get(`${API_URL}/api/books`,{
+    axios.get(`${API_URL}/api/books${guest}`,{
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(res => {

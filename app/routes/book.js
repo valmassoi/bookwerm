@@ -34,9 +34,13 @@ module.exports = function(app) {
       })
   })
 
-  app.get('/api/books', requireAuth, (req, res, next) => {//no auth give just all
-    console.log("GETING BOOKS")
+  app.get('/api/books', requireAuth, (req, res, next) => {//TODO no auth give just all
+    console.log("GETING BOOKS for logged in")
     Book.all(req.user.books, res, next)
+  })
+  app.get('/api/books/guest', (req, res, next) => {//TODO no auth give just all
+    console.log("GETING BOOKS for guest")
+    Book.all(null, res, next)
   })
 
   app.post('/api/book', requireAuth, (req, res, next) => {

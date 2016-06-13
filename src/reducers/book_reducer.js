@@ -1,8 +1,10 @@
-import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK, REQUEST_BOOK, APPROVE_BOOK, REJECT_BOOK } from '../actions/types'
+import { BOOK_SEARCH, GET_BOOKS, SELECT_BOOK, DELETE_BOOK, REQUEST_BOOK, APPROVE_BOOK, REJECT_BOOK, UNAUTH_USER } from '../actions/types'
 import _ from 'lodash'
 
 export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[] }, action) {
   switch (action.type) {
+    case UNAUTH_USER:
+      return { ...state, searchBooks:[], collectionBooks:[], allBooks:[] }
     case BOOK_SEARCH:
       return { ...state, searchBooks: action.payload}
     case GET_BOOKS:
@@ -15,7 +17,7 @@ export default function(state = { searchBooks:[], collectionBooks:[], allBooks:[
       return {
         ...state,
         collectionBooks: [action.payload, ...state.collectionBooks],
-        allBooks: [action.payload, ...state.allBooks],
+        allBooks: [action.payload, ...state.allBooks],//Dont need?
         searchBooks: []
       }
     case REQUEST_BOOK:
