@@ -9,6 +9,7 @@ import Signup from "./pages/Signup"
 import Signin from "./pages/Signin"
 import Settings from "./pages/Settings"
 import RequireAuth from './components/require_auth'
+import NotFound from './pages/404'
 
 export default (
   <Route path="/" component={Layout}>
@@ -18,5 +19,6 @@ export default (
     <Route path="library" component={Library} />
     <Route path="dashboard" component={RequireAuth(Dashboard)} />
     <Route path="settings" component={RequireAuth(Settings)} />
+    <Route path="*" component={NotFound} />
   </Route>
 )

@@ -20,11 +20,18 @@ class Dashboard extends Component {
     this.props.getBooks()
   }
 
+  renderBooks() {
+    let { collectionBooks } = this.props
+    return (
+      collectionBooks.length > 0 ?
+      <BookList mode="user_collection" /> :
+      <div>No books in collection, add one above</div>
+    )
+  }
   render() {
     const style = {
       clear: 'both'
     }
-    let { collectionBooks } = this.props
 
     return(
       <div>
@@ -36,9 +43,7 @@ class Dashboard extends Component {
         <BookList mode="search" />
         <h3 style={style}>My Collection</h3>
         {
-          collectionBooks.length > 0 ?
-          <BookList mode="user_collection" /> :
-          <div>No books in collection, add one above</div>
+          this.renderBooks()
         }
       </div>
     )
