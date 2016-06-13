@@ -22,11 +22,14 @@ class Dashboard extends Component {
 
   renderBooks() {
     let { collectionBooks } = this.props
-    return (
-      collectionBooks.length > 0 ?
-      <BookList mode="user_collection" /> :
-      <div>No books in collection, add one above</div>
-    )
+    if(collectionBooks){
+      return (
+        collectionBooks.length > 0 ?
+        <BookList mode="user_collection" /> :
+        <div>No books in collection, add one above</div>
+      )
+    }
+    else { return <div></div> }
   }
   render() {
     const style = {
