@@ -9,7 +9,7 @@ class Trades extends Component {
       clear: 'both'
     }
     return (
-      <div>No active trades, find a book you like in <Link to="/library">All Books</Link>
+      <div>No active trades? Find a book you like in <Link to="/library">All Books</Link>
       <h4>My requests:</h4>
       <h6>Wishlist queue (wait for owner):</h6>
       <BookList mode="wishlist" />
@@ -23,7 +23,6 @@ class Trades extends Component {
       </div>
     )
   }
-
 }
 
 export default Trades

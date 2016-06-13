@@ -25,8 +25,7 @@ router(app)
 
 
 app.get('*', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' })
-  res.end('404!')
+  res.sendFile(path.resolve(__dirname, '../src/index.html'))
 })
 
 const PORT = process.env.PORT || 8081
