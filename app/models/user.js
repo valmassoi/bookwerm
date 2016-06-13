@@ -19,7 +19,6 @@ userSchema.pre('save', function(next) { // run before save DONT DO ARROW FUNCTIO
     return next()
 
   bcrypt.genSalt(10, (err, salt) => {
-    console.log("salting");
     if (err) { return next(err) }
     bcrypt.hash(user.password, salt, null, (err, hash) => {
       if (err) { return next(err) }

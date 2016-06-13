@@ -19,13 +19,11 @@ function sendEmail(email) {
     text:     'Thanks for signing up. Visit http://bookwerm.heroku.com/dashboard to get started!'
   }, (err, json) => {
     if (err) { return console.error(err) }
-    console.log("send grid:", json)
   })
 }
 
 exports.signin = (req, res, next) => {
   //user has email and pass authed, give them a token
-  console.log("req user@!!", req.user.profile);
   res.send({ token: tokenForUser(req.user), profile: req.user.profile })
 }
 

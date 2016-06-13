@@ -1,6 +1,6 @@
 {
   "name": "bookwerm",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A `MERN` full stack JavaScript app",
   "main": "webpack.config.js",
   "scripts": {

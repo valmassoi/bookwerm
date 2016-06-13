@@ -13,12 +13,10 @@ module.exports = function(app) {
   })
 
   app.post('/profile', requireAuth, (req, res, next) => {//change to PUT?
-    console.log(req.user.email)//TOKEN!
     Authentication.profile(req.user.email, req.body.formProps, res, next)
   })
 
   app.get('/profile', requireAuth, (req, res, next) => {
-    console.log(req.user.email)//TOKEN!
     Authentication.profile(req.user.email, null, res, next)
   })
 

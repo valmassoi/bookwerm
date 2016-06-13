@@ -25,7 +25,6 @@ exports.delete = (email, book, res, next) => {
 }
 
 exports.trade = (email, book, res, next) => {
-  console.log("trade", book.title, "with", book.owner);
   User.update(
     { email: book.owner, "books.title":book.title },//TODO should be ISBN
     {$set: { "books.$.requester":email, "books.$.status":null } },
@@ -33,14 +32,12 @@ exports.trade = (email, book, res, next) => {
     (err, data) => {
       if (err) { return next(err); }
       //Could send email to owner here
-      console.log(data);
       res.send({ trade: 'requested' })
     }
   )
 }
 
 exports.change = (email, book, res, next, status) => {
-  console.log("trade", book.title, "with", book.owner);
   User.update(
     { email: book.owner, "books.title":book.title },//TODO should be ISBN
     {$set: { "books.$.status":status } },
@@ -48,14 +45,12 @@ exports.change = (email, book, res, next, status) => {
     (err, data) => {
       if (err) { return next(err); }
       //Could send email here
-      console.log(data);
       res.send({ trade: status })
     }
   )
 }
 
 exports.all = (userBooks, res, next) => {//email
-  console.log("AGGREGATING");
   User.aggregate(
     { "$group": {
         _id: null,//"$email"

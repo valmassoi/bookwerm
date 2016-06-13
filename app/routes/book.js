@@ -35,11 +35,9 @@ module.exports = function(app) {
   })
 
   app.get('/api/books', requireAuth, (req, res, next) => {//TODO no auth give just all
-    console.log("GETING BOOKS for logged in")
     Book.all(req.user.books, res, next)
   })
   app.get('/api/books/guest', (req, res, next) => {//TODO no auth give just all
-    console.log("GETING BOOKS for guest")
     Book.all(null, res, next)
   })
 
@@ -62,7 +60,6 @@ module.exports = function(app) {
   })
 
   app.delete('/api/book/:book', requireAuth, (req, res, next) => {
-    console.log(req.user.email)//TOKEN!
     let { book } = req.params
     Book.delete(req.user.email, book, res, next)
   })

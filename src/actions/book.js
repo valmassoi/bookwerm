@@ -6,7 +6,6 @@ import _ from 'lodash'
 let API_URL = '' // http://localhost:8081
 
 export function addBook(book) {//search
-  console.log("search:,", book);
   return function(dispatch) {
     axios.get(`${API_URL}/api/book/${book}`)
       .then(res => {
