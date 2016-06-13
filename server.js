@@ -6,6 +6,7 @@ const router = require('./app/router')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const path = require('path')
 
 const app = express()
 
@@ -18,7 +19,7 @@ if (process.env.NODE_ENV !== 'production'){
   app.use(morgan('combined'))
 }
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: '*/*' }))
 app.enable('trust proxy')
 router(app)
