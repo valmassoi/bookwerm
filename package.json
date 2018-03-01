@@ -45,7 +45,7 @@
     "redux-form": "^5.2.5",
     "redux-thunk": "^2.1.0",
     "sendgrid": "^2.0.0",
-    "webpack": "^1.13.0",
+    "webpack": "^2.2.0",
     "webpack-dev-server": "^1.14.1"
   },
   "engines": {
